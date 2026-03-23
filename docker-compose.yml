@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  valheim:
+    container_name: valheim_server_docker
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "2456:2456/udp"
+      - "2457:2457/udp"
+    volumes:
+      - ./game_files:/home/steam/valheim-dedicated
+      - ./server_config:/home/steam/config
+    restart: unless-stopped
+    stop_grace_period: 2m
